@@ -33,34 +33,34 @@ export default function DashboardView(): React.JSX.Element {
 
   if (error) {
     return (
-      <div className="bg-red-50 p-4 rounded-xl border border-red-100">
-        <p className="text-sm font-bold text-red-800 uppercase tracking-wide">System Error</p>
-        <p className="text-sm text-red-600 mt-1">{error}</p>
+      <div className="bg-destructive/10 p-4 rounded-xl border border-destructive/20">
+        <p className="text-sm font-bold text-destructive uppercase tracking-wide">System Error</p>
+        <p className="text-sm text-destructive/80 mt-1">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Financial Overview</h1>
-        <p className="text-base text-gray-500 mt-1">Your high-level financial summary at a glance.</p>
+        <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Financial Overview</h1>
+        <p className="text-base text-muted-foreground mt-1">Your high-level financial summary at a glance.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-center">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Net Balance</p>
-          <h3 className="text-3xl font-black text-gray-900 tracking-tighter">{formatCurrency(balance)}</h3>
+        <div className="bg-card p-6 rounded-2xl shadow-sm border border-border flex flex-col justify-center">
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Net Balance</p>
+          <h3 className="text-3xl font-black text-foreground tracking-tighter">{formatCurrency(balance)}</h3>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-center border-l-4 border-l-emerald-500">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Income</p>
+        <div className="bg-card p-6 rounded-2xl shadow-sm border border-border flex flex-col justify-center border-l-4 border-l-emerald-500">
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Total Income</p>
           <h3 className="text-3xl font-black text-emerald-600 tracking-tighter">{formatCurrency(totalIncome)}</h3>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-center border-l-4 border-l-red-500">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Expenses</p>
-          <h3 className="text-3xl font-black text-red-600 tracking-tighter">{formatCurrency(totalExpenses)}</h3>
+        <div className="bg-card p-6 rounded-2xl shadow-sm border border-border flex flex-col justify-center border-l-4 border-l-destructive">
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Total Expenses</p>
+          <h3 className="text-3xl font-black text-destructive tracking-tighter">{formatCurrency(totalExpenses)}</h3>
         </div>
       </div>
 

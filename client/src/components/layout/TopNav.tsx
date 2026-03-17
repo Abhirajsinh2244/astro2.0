@@ -32,16 +32,6 @@ export default function TopNav(): React.JSX.Element {
               <a href="/budgets" className={navLinkClass('/budgets')}>Budgets</a>
             </div>
           </div>
-
-          <div className="flex items-center space-x-6">
-            <button className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors relative">
-              Alerts
-              <span className="absolute -top-1 -right-2 block h-2 w-2 rounded-full bg-emerald-500" />
-            </button>
-            <div className="h-4 w-px bg-gray-200" aria-hidden="true" />
-            <button className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Profile</button>
-            <button className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Settings</button>
-          </div>
         </div>
       </div>
     </nav>

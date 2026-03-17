@@ -22,7 +22,7 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps): Rea
     
     // Pre-fill the last 6 months to ensure the chart renders continuous time-series lines 
     // even if a specific month has zero transactions.
-    for (let i = 5; i >= 0; i--) {
+    for (let i = 11; i >= 0; i--) {
       const date = subMonths(new Date(), i);
       const monthKey = format(date, 'MMM yyyy');
       monthsMap.set(monthKey, { month: format(date, 'MMM'), expenses: 0, income: 0 });

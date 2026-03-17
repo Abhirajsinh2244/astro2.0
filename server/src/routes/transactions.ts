@@ -73,6 +73,40 @@ const transactionsRouter = new Hono()
       }, 201);
     }
   )
+  // PUT: Update an existing record in Supabase
+  .put(
+    '/:id',
+    zValidator('json', transactionSchema, (result, c) => {
+      if (!result.success) {
+        return c.json({ success: false, error: 'Validation failed', details: result.error.issues }, 400);
+      }
+    }),
+    async (c) => {
+      const id = c.req.param('id');
+      const payload = await c.req.valid('json');
+
+      const { data, error } = await supabase
+        .from('transactions')
+        .update(payload)
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Supabase PUT Error:", error);
+        return c.json({ success: false, error: 'Failed to update record' }, 500);
+      }
+
+      if (!data) {
+        return c.json({ success: false, error: 'Record not found' }, 404);
+      }
+
+      return c.json({
+        success: true,
+        data: data as TransactionDTO
+      }, 200);
+    }
+  )
 
   // DELETE: Remove record from Supabase
   .delete('/:id', async (c) => {

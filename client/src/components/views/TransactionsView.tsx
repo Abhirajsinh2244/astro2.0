@@ -32,7 +32,7 @@ export default function TransactionsView(): React.JSX.Element {
 
   useEffect(() => { fetchTransactions(); }, [fetchTransactions]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -43,6 +43,7 @@ export default function TransactionsView(): React.JSX.Element {
     const success = await addTransaction({ ...formData, amount: parseFloat(formData.amount), type: transactionType });
     if (success) {
       setIsModalOpen(false);
+      // Reset form, including the description field
       setFormData(prev => ({ ...prev, merchant: '', description: '', amount: '' }));
     }
     setIsSubmitting(false);
@@ -209,6 +210,19 @@ export default function TransactionsView(): React.JSX.Element {
               <div>
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">{transactionType === 'expense' ? 'Merchant' : 'Source'}</label>
                 <input required type="text" name="merchant" value={formData.merchant} onChange={handleInputChange} className="w-full border-b border-gray-300 pb-1 text-sm outline-none focus:border-gray-900 font-medium" placeholder="E.g. Target, Payroll" />
+              </div>
+              
+              {/* NEW DESCRIPTION FIELD */}
+              <div>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Description <span className="text-gray-300 font-medium lowercase tracking-normal"></span></label>
+                <input 
+                  type="text" 
+                  name="description" 
+                  value={formData.description} 
+                  onChange={handleInputChange} 
+                  className="w-full border-b border-gray-300 pb-1 text-sm outline-none focus:border-gray-900 font-medium placeholder-gray-300" 
+                  placeholder="Additional context or notes..." 
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-6">

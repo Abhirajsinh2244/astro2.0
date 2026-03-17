@@ -19,7 +19,6 @@ export function useTransactions() {
 
       const result = await response.json();
 
-      // Explicitly check for 'data' to satisfy TypeScript's strict union narrowing
       if (result.success === true && 'data' in result) {
         setData(result.data as unknown as Transaction[]);
       } else {
@@ -42,7 +41,6 @@ export function useTransactions() {
       
       const result = await response.json();
 
-      // Bypassing the zValidator boolean mismatch using a safe 'any' cast for the success branch
       if (result.success === true) {
         setData(prev => [(result as any).data as unknown as Transaction, ...prev]);
         return true;
@@ -52,6 +50,30 @@ export function useTransactions() {
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to add transaction';
+      setError(message);
+      return false;
+    }
+  };
+
+  const editTransaction = async (id: string, payload: Omit<Transaction, 'id'>) => {
+    try {
+      const response = await apiClient.api.transactions[':id'].$put({
+        param: { id },
+        json: payload as any
+      });
+
+      const result = await response.json();
+
+      if (result.success === true) {
+        // Map the updated transaction into the existing data array efficiently
+        setData(prev => prev.map(t => t.id === id ? ((result as any).data as unknown as Transaction) : t));
+        return true;
+      } else {
+        console.error('Server Validation Details:', (result as any).details);
+        throw new Error((result as any).error || 'Update failed');
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to update transaction';
       setError(message);
       return false;
     }
@@ -84,6 +106,7 @@ export function useTransactions() {
     error,
     fetchTransactions,
     addTransaction,
+    editTransaction,
     deleteTransaction
   };
 }
