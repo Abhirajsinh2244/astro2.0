@@ -19,7 +19,7 @@ export default function DashboardView(): React.JSX.Element {
   }, [transactions]);
 
   const formatCurrency = (amount: number) => 
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'INR' }).format(amount);
 
   if (isLoading) {
     return (

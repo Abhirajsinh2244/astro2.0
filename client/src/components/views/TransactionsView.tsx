@@ -63,7 +63,7 @@ export default function TransactionsView(): React.JSX.Element {
   const currentTransactions = filteredTransactions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const formatCurrency = (amount: number, type: TransactionType) => {
-    const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    const formatted = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
     return type === 'expense' ? `-${formatted}` : `+${formatted}`;
   };
 
@@ -84,7 +84,7 @@ export default function TransactionsView(): React.JSX.Element {
       </div>
 
       <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-wrap gap-6 items-end">
-        <div className="flex-1 min-w-[250px]">
+        <div className="flex-1 min-w-\[250px\]">
           <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Date Range</label>
           <div className="flex items-center space-x-2 border-b border-gray-300 pb-1 focus-within:border-gray-900 transition-colors">
             <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="outline-none text-sm w-full bg-transparent font-medium"/>
@@ -92,14 +92,14 @@ export default function TransactionsView(): React.JSX.Element {
             <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="outline-none text-sm w-full bg-transparent font-medium"/>
           </div>
         </div>
-        <div className="flex-1 min-w-[200px]">
+        <div className="flex-1 min-w-\[200px]">
           <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Category</label>
           <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="w-full border-b border-gray-300 pb-1 text-sm bg-transparent outline-none focus:border-gray-900 font-medium cursor-pointer appearance-none transition-colors">
             <option value="All">All Categories</option>
             {Object.keys(CATEGORY_MAP).map(cat => <option key={cat} value={cat}>{cat}</option>)}
           </select>
         </div>
-        <div className="flex-1 min-w-[200px]">
+        <div className="flex-1 min-w-\[200px\]">
           <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Account Filter</label>
           <select value={filterAccount} onChange={(e) => setFilterAccount(e.target.value)} className="w-full border-b border-gray-300 pb-1 text-sm bg-transparent outline-none focus:border-gray-900 font-medium cursor-pointer appearance-none transition-colors">
             <option value="All">All Accounts</option>
@@ -121,7 +121,7 @@ export default function TransactionsView(): React.JSX.Element {
           </div>
         </div>
 
-        <div className="overflow-x-auto min-h-[400px]">
+        <div className="overflow-x-auto min-h-\[400px\]">
           <table className="w-full text-left text-sm whitespace-nowrap">
             <thead className="bg-gray-50/50">
               <tr>
@@ -152,7 +152,7 @@ export default function TransactionsView(): React.JSX.Element {
                     <td className="px-6 py-4 font-semibold text-gray-900">{formatDate(tx.date)}</td>
                     <td className="px-6 py-4 text-gray-700 font-medium">{tx.merchant}</td>
                     <td className="px-6 py-4 font-medium text-gray-600">{tx.category}</td>
-                    <td className="px-6 py-4 text-gray-400 truncate max-w-[200px]" title={tx.description}>{tx.description || '—'}</td>
+                    <td className="px-6 py-4 text-gray-400 truncate max-w-\[200px\]" title={tx.description}>{tx.description || '—'}</td>
                     <td className={`px-6 py-4 font-black tracking-tight ${tx.type === 'expense' ? 'text-red-500' : 'text-emerald-500'}`}>
                       {formatCurrency(tx.amount, tx.type)}
                     </td>

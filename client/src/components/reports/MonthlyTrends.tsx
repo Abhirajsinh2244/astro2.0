@@ -45,9 +45,9 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps): Rea
 
   // Utility for standardizing currency format in the Y-Axis and Tooltip
   const formatCurrency = (val: number) => {
-    if (val === 0) return '$0';
-    if (val >= 1000) return `$${(val / 1000).toFixed(1)}k`;
-    return `$${val.toLocaleString()}`;
+    if (val === 0) return '₹0';
+    if (val >= 1000) return `${(val / 1000).toFixed(1)}k`;
+    return `₹${val.toLocaleString('en-IN')}`;
   };
 
   return (
@@ -112,7 +112,7 @@ export default function MonthlyTrends({ transactions }: MonthlyTrendsProps): Rea
                               {entry.name}
                             </span>
                             <span className="font-black tracking-tight" style={{ color: entry.color }}>
-                              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(entry.value as number)}
+                              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'INR' }).format(entry.value as number)}
                             </span>
                           </div>
                         ))}
